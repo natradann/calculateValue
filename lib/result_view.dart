@@ -1,21 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:test1/components/Button.dart';
+import 'package:test1/constants/colors.dart';
 import 'package:test1/controller.dart';
-import 'package:test1/enter_values_view.dart';
+
+bool isAcceptCTDI(
+    {required Controller controller,
+    required double d,
+    required List<double> listCTDI}) {
+  return controller.isAccept(value: d, values: listCTDI);
+}
+
+bool isMoreThanCTDI(
+    {required Controller controller,
+    required double d,
+    required List<double> listCTDI}) {
+  return controller.isMoreThan(value: d, max: listCTDI[1]);
+}
 
 class ResultView extends StatefulWidget {
   const ResultView(
       {Key? key,
-      required this.d,
+      this.d,
       required this.e,
       required this.valuesDLP,
-      required this.valuesCTDI})
+      this.valuesCTDI})
       : super(key: key);
 
-  final double d;
+  final double? d;
   final double e;
   final List<double> valuesDLP;
-  final List<double> valuesCTDI;
+  final List<double>? valuesCTDI;
 
   @override
   State<ResultView> createState() => _ResultViewState();
@@ -23,6 +37,7 @@ class ResultView extends StatefulWidget {
 
 class _ResultViewState extends State<ResultView> {
   final Controller _controller = Controller();
+
   @override
   void initState() {
     super.initState();
@@ -30,109 +45,149 @@ class _ResultViewState extends State<ResultView> {
 
   @override
   Widget build(BuildContext context) {
-    bool isAcceptCTDI =
-        _controller.isAccept(value: widget.d, values: widget.valuesCTDI);
-    bool isAcceptDLP =
-        _controller.isAccept(value: widget.e, values: widget.valuesDLP);
-    bool isMoreThanCTDI =
-        _controller.isMoreThan(value: widget.d, max: widget.valuesCTDI[1]);
-    bool isMoreThanDLP =
-        _controller.isMoreThan(value: widget.e, max: widget.valuesDLP[1]);
+    // bool isAcceptDLP =
+    //     _controller.isAccept(value: widget.e, values: widget.valuesDLP);
+    // bool isMoreThanDLP =
+    //     _controller.isMoreThan(value: widget.e, max: widget.valuesDLP[1]);
     return SafeArea(
-        child: Scaffold(
-      backgroundColor: Colors.white,
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              isAcceptCTDI
-                  ? Text("ACCEPTABLE",
+      child: Scaffold(
+        backgroundColor: bgColor,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            (widget.d != null)
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      isAcceptCTDI(
+                              controller: _controller,
+                              d: widget.d!,
+                              listCTDI: widget.valuesCTDI!)
+                          ? const Text("ACCEPTABLE",
+                              style: TextStyle(
+                                  color: textGreen,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold))
+                          : const Text("UNACCEPTABLE",
+                              style: TextStyle(
+                                  color: textRed,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold)),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("CTDIvol ",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 20)),
+                          Text(
+                            widget.d!.toStringAsFixed(1),
+                            style: TextStyle(
+                              color: isAcceptCTDI(
+                                      controller: _controller,
+                                      d: widget.d!,
+                                      listCTDI: widget.valuesCTDI!)
+                                  ? textGreen
+                                  : textRed,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const Text(" mGy",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 20))
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        isMoreThanCTDI(
+                                controller: _controller,
+                                d: widget.d!,
+                                listCTDI: widget.valuesCTDI!)
+                            ? "This value is ${_controller.calDifference(value: widget.d!, max: widget.valuesCTDI![1]).toStringAsFixed(2)}% \nmore than the DRLs."
+                            : "This value is ${_controller.calDifference(value: widget.d!, max: widget.valuesCTDI![1]).toStringAsFixed(2)}% \nless than the DRLs.",
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  )
+                : const SizedBox(height: 1),
+            const SizedBox(
+              height: 100,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _controller.isAccept(value: widget.e, values: widget.valuesDLP)
+                    ? const Text("ACCEPTABLE",
+                        style: TextStyle(
+                            color: textGreen,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold))
+                    : const Text("UNACCEPTABLE",
+                        style: TextStyle(
+                            color: textRed,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold)),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("DLP ",
+                        style: TextStyle(color: Colors.black, fontSize: 20)),
+                    Text(
+                      widget.e.toStringAsFixed(1),
                       style: TextStyle(
-                          color: Colors.green,
-                          fontSize: 30,
-                          fontWeight: FontWeight.w500))
-                  : Text("UNACCEPTABLE",
-                      style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 30,
-                          fontWeight: FontWeight.w500)),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  Text("CTDIvol ",
-                      style: TextStyle(color: Colors.black, fontSize: 20)),
-                  Text(widget.d.toStringAsFixed(1),
-                      style: TextStyle(
-                          color: isAcceptCTDI ? Colors.green : Colors.red,
-                          fontSize: 20)),
-                  Text(" mGy",
-                      style: TextStyle(color: Colors.black, fontSize: 20))
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                  isMoreThanCTDI
-                      ? "This value is ${_controller.calDifference(value: widget.d, max: widget.valuesCTDI[1]).toStringAsFixed(2)}% more than the DRLs."
-                      : "This value is ${_controller.calDifference(value: widget.d, max: widget.valuesCTDI[1]).toStringAsFixed(2)}% less than the DRLs.",
-                  style: TextStyle(
+                        color: _controller.isAccept(
+                                value: widget.e, values: widget.valuesDLP)
+                            ? textGreen
+                            : textRed,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Text(" mGy",
+                        style: TextStyle(color: Colors.black, fontSize: 20))
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  _controller.isMoreThan(
+                          value: widget.e, max: widget.valuesDLP[1])
+                      ? "This value is ${_controller.calDifference(value: widget.e, max: widget.valuesDLP[1]).toStringAsFixed(2)}% \nmore than the DRLs."
+                      : "This value is ${_controller.calDifference(value: widget.e, max: widget.valuesDLP[1]).toStringAsFixed(2)}% \nless than the DRLs.",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 20,
-                  )),
-              SizedBox(
-                height: 100,
-              ),
-              isAcceptDLP
-                  ? Text("ACCEPTABLE",
-                      style: TextStyle(
-                          color: Colors.green,
-                          fontSize: 30,
-                          fontWeight: FontWeight.w500))
-                  : Text("UNACCEPTABLE",
-                      style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 30,
-                          fontWeight: FontWeight.w500)),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  Text("DLP ",
-                      style: TextStyle(color: Colors.black, fontSize: 20)),
-                  Text(widget.e.toStringAsFixed(1),
-                      style: TextStyle(
-                          color: isAcceptDLP ? Colors.green : Colors.red,
-                          fontSize: 20)),
-                  Text(" mGy",
-                      style: TextStyle(color: Colors.black, fontSize: 20))
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                  isMoreThanDLP
-                      ? "This value is ${_controller.calDifference(value: widget.e, max: widget.valuesDLP[1]).toStringAsFixed(2)}% more than the DRLs."
-                      : "This value is ${_controller.calDifference(value: widget.e, max: widget.valuesDLP[1]).toStringAsFixed(2)}% less than the DRLs.",
-                  style: TextStyle(color: Colors.black, fontSize: 20)),
-              SizedBox(
-                height: 100,
-              ),
-              Button(
-                  buttonName: "End",
-                  onTapped: () {
-                    Navigator.of(context).popUntil((route) => route.isFirst);
-                  })
-            ],
-          ),
-        ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 100,
+            ),
+            Button(
+              buttonName: "End",
+              onTapped: () {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+              },
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

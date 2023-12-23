@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:test1/components/Button.dart';
+import 'package:test1/constants/colors.dart';
 import 'package:test1/show_values.dart';
 
 class EnterValuesView extends StatefulWidget {
@@ -22,6 +22,7 @@ class _EnterValuesViewState extends State<EnterValuesView> {
     c = TextEditingController();
   }
 
+  //calculate CTDIvol
   double ctdivol({required double a, required double b}) {
     return b / a;
   }
@@ -32,9 +33,11 @@ class _EnterValuesViewState extends State<EnterValuesView> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return SafeArea(
         child: Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: bgColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -43,7 +46,7 @@ class _EnterValuesViewState extends State<EnterValuesView> {
             children: [
               const Text(
                 "Pitch",
-                style: TextStyle(color: Colors.black, fontSize: 20),
+                style: TextStyle(color: Colors.black, fontSize: 25),
               ),
               const SizedBox(
                 width: 10,
@@ -54,6 +57,8 @@ class _EnterValuesViewState extends State<EnterValuesView> {
                 child: TextFormField(
                   controller: a,
                   keyboardType: TextInputType.number,
+                  style: const TextStyle(color: Colors.black, fontSize: 25),
+                  textAlign: TextAlign.center,
                 ),
               )
             ],
@@ -66,7 +71,7 @@ class _EnterValuesViewState extends State<EnterValuesView> {
             children: [
               const Text(
                 "CTDIw",
-                style: TextStyle(color: Colors.black, fontSize: 20),
+                style: TextStyle(color: Colors.black, fontSize: 25),
               ),
               const SizedBox(
                 width: 10,
@@ -77,6 +82,8 @@ class _EnterValuesViewState extends State<EnterValuesView> {
                 child: TextFormField(
                   controller: b,
                   keyboardType: TextInputType.number,
+                  style: const TextStyle(color: Colors.black, fontSize: 25),
+                  textAlign: TextAlign.center,
                 ),
               ),
               const SizedBox(
@@ -84,7 +91,7 @@ class _EnterValuesViewState extends State<EnterValuesView> {
               ),
               const Text(
                 "mGy",
-                style: TextStyle(color: Colors.black, fontSize: 20),
+                style: TextStyle(color: Colors.black, fontSize: 25),
               ),
             ],
           ),
@@ -96,7 +103,7 @@ class _EnterValuesViewState extends State<EnterValuesView> {
             children: [
               const Text(
                 "Scan Length",
-                style: TextStyle(color: Colors.black, fontSize: 20),
+                style: TextStyle(color: Colors.black, fontSize: 25),
               ),
               const SizedBox(
                 width: 10,
@@ -107,6 +114,8 @@ class _EnterValuesViewState extends State<EnterValuesView> {
                 child: TextFormField(
                   controller: c,
                   keyboardType: TextInputType.number,
+                  style: const TextStyle(color: Colors.black, fontSize: 25),
+                  textAlign: TextAlign.center,
                 ),
               ),
               const SizedBox(
@@ -114,15 +123,19 @@ class _EnterValuesViewState extends State<EnterValuesView> {
               ),
               const Text(
                 "cm",
-                style: TextStyle(color: Colors.black, fontSize: 20),
+                style: TextStyle(color: Colors.black, fontSize: 25),
               ),
             ],
           ),
           const SizedBox(
-            height: 50,
+            height: 80,
           ),
           Button(
             buttonName: "CALCULATE",
+            sizeText: 22,
+            weightText: FontWeight.bold,
+            bgColor: white,
+            fgColor: textColor,
             onTapped: () {
               double d =
                   ctdivol(a: double.parse(a.text), b: double.parse(b.text));
@@ -133,10 +146,11 @@ class _EnterValuesViewState extends State<EnterValuesView> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ShowValuesView(
-                          d: d,
-                          e: e,
-                        )),
+                  builder: (context) => ShowValuesView(
+                    d: d,
+                    e: e,
+                  ),
+                ),
               );
             },
           ),
