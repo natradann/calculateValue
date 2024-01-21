@@ -80,10 +80,9 @@ class _AbdomenViewState extends State<AbdomenView> {
                     const Text(
                       "Select Phase",
                       style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold
-                      ),
+                          color: Colors.black,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 50,
@@ -108,7 +107,7 @@ class _AbdomenViewState extends State<AbdomenView> {
                           ),
                           child: DropdownButton(
                             isExpanded: true,
-                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            // padding: const EdgeInsets.symmetric(horizontal: 5),
                             alignment: Alignment.center,
                             value: upperAbValue,
                             items: abdomenWith.map<DropdownMenuItem<String>>(
@@ -157,7 +156,7 @@ class _AbdomenViewState extends State<AbdomenView> {
                           ),
                           child: DropdownButton(
                             isExpanded: true,
-                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            // padding: const EdgeInsets.symmetric(horizontal: 5),
                             alignment: Alignment.center,
                             value: wholeAbValue,
                             items: abdomenWith.map<DropdownMenuItem<String>>(

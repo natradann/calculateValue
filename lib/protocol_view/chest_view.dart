@@ -58,180 +58,181 @@ class _ChestViewState extends State<ChestView> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          backgroundColor: bgColor,
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 60),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: bgColor,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 60),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    const Text(
+                      "Select Phase",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Select Phase",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        Row(
                           children: [
-                            Row(
-                              children: [
-                                const Text(
-                                  "Routine 1 phase :",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                  alignment: Alignment.centerRight,
-                                  width: 100,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[300],
-                                    borderRadius: BorderRadius.circular(4.0),
-                                    border: Border.all(color: Colors.black, width: 1),
-                                  ),
-                                  child: DropdownButton(
-                                    isExpanded: true,
-                                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                                    alignment: Alignment.center,
-                                    value: chestValue1,
-                                    items: chestList1.map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      },
-                                    ).toList(),
-                                    onChanged: (value) {
-                                      setState(
-                                            () {
-                                          chestValue1 = value.toString();
-                                          chestValue2 = "";
-                                          valueChest = value.toString();
-                                        },
-                                      );
-                                    },
-                                    focusColor: Colors.grey[300],
-                                    dropdownColor: Colors.grey[300],
-                                  ),
-                                ),
-                              ],
+                            const Text(
+                              "Routine 1 phase :",
+                              style: TextStyle(fontSize: 20),
                             ),
                             const SizedBox(
-                              height: 30,
+                              width: 10,
                             ),
-                            Row(
-                              children: [
-                                const Text(
-                                  "Routine 2 phases :",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                  alignment: Alignment.centerRight,
-                                  width: 100,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[300],
-                                    borderRadius: BorderRadius.circular(4.0),
-                                    border: Border.all(color: Colors.black, width: 1),
-                                  ),
-                                  child: DropdownButton(
-                                    isExpanded: true,
-                                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                                    alignment: Alignment.center,
-                                    value: chestValue2,
-                                    items: chestList2.map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      },
-                                    ).toList(),
-                                    onChanged: (value) {
-                                      setState(
-                                            () {
-                                              chestValue1 = "";
-                                          chestValue2 = value.toString();
-                                          valueChest = value.toString();
-                                        },
-                                      );
+                            Container(
+                              alignment: Alignment.centerRight,
+                              width: 100,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                borderRadius: BorderRadius.circular(4.0),
+                                border:
+                                    Border.all(color: Colors.black, width: 1),
+                              ),
+                              child: DropdownButton(
+                                isExpanded: true,
+                                // padding: const EdgeInsets.symmetric(horizontal: 5),
+                                alignment: Alignment.center,
+                                value: chestValue1,
+                                items: chestList1.map<DropdownMenuItem<String>>(
+                                  (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  },
+                                ).toList(),
+                                onChanged: (value) {
+                                  setState(
+                                    () {
+                                      chestValue1 = value.toString();
+                                      chestValue2 = "";
+                                      valueChest = value.toString();
                                     },
-                                    focusColor: Colors.grey[300],
-                                    dropdownColor: Colors.grey[300],
-                                  ),
-                                ),
-                              ],
+                                  );
+                                },
+                                focusColor: Colors.grey[300],
+                                dropdownColor: Colors.grey[300],
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          children: [
+                            const Text(
+                              "Routine 2 phases :",
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              alignment: Alignment.centerRight,
+                              width: 100,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                borderRadius: BorderRadius.circular(4.0),
+                                border:
+                                    Border.all(color: Colors.black, width: 1),
+                              ),
+                              child: DropdownButton(
+                                isExpanded: true,
+                                // padding: const EdgeInsets.symmetric(horizontal: 5),
+                                alignment: Alignment.center,
+                                value: chestValue2,
+                                items: chestList2.map<DropdownMenuItem<String>>(
+                                  (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  },
+                                ).toList(),
+                                onChanged: (value) {
+                                  setState(
+                                    () {
+                                      chestValue1 = "";
+                                      chestValue2 = value.toString();
+                                      valueChest = value.toString();
+                                    },
+                                  );
+                                },
+                                focusColor: Colors.grey[300],
+                                dropdownColor: Colors.grey[300],
+                              ),
                             ),
                           ],
                         ),
                       ],
                     ),
-                    Button(
-                      buttonName: "Continue",
-                      bgColor: white,
-                      fgColor: textColor,
-                      onTapped: () {
-                        if (valueChest == "SUM") {
-                          List<double> valuesDLP =
+                  ],
+                ),
+                Button(
+                  buttonName: "Continue",
+                  bgColor: white,
+                  fgColor: textColor,
+                  onTapped: () {
+                    if (valueChest == "SUM") {
+                      List<double> valuesDLP =
                           standardDLP(valueChest: valueChest);
 
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ResultView(
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ResultView(
                                     e: widget.e * 2,
                                     valuesDLP: valuesDLP,
                                   )));
-                        } else if (valueChest == "NC or V" ||
-                            valueChest == "NC" ||
-                            valueChest == "V") {
-                          List<double> valuesDLP =
+                    } else if (valueChest == "NC or V" ||
+                        valueChest == "NC" ||
+                        valueChest == "V") {
+                      List<double> valuesDLP =
                           standardDLP(valueChest: valueChest);
-                          List<double> valuesCTDI =
+                      List<double> valuesCTDI =
                           standardCTDI(valueChest: valueChest);
 
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ResultView(
-                                d: widget.d,
-                                e: widget.e,
-                                valuesDLP: valuesDLP,
-                                valuesCTDI: valuesCTDI,
-                              ),
-                            ),
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ResultView(
+                            d: widget.d,
+                            e: widget.e,
+                            valuesDLP: valuesDLP,
+                            valuesCTDI: valuesCTDI,
+                          ),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(const SnackBar(
                               content: Text("Please Select Phase"),
                               duration: Duration(seconds: 1)))
-                              .closed
-                              .then((_) {});
-                        }
-                      },
-                    )
-                  ],
-                ),
+                          .closed
+                          .then((_) {});
+                    }
+                  },
+                )
               ],
             ),
-          ),
-        ));
+          ],
+        ),
+      ),
+    ));
   }
 }

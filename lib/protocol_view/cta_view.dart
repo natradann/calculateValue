@@ -146,10 +146,9 @@ class _CTAViewState extends State<CTAView> {
                       const Text(
                         "Select Phase",
                         style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold
-                        ),
+                            color: Colors.black,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(
                         height: 50,
@@ -174,16 +173,18 @@ class _CTAViewState extends State<CTAView> {
                                 decoration: BoxDecoration(
                                   color: Colors.grey[300],
                                   borderRadius: BorderRadius.circular(4.0),
-                                  border: Border.all(color: Colors.black, width: 1),
+                                  border:
+                                      Border.all(color: Colors.black, width: 1),
                                 ),
                                 child: DropdownButton(
                                   isExpanded: true,
-                                  padding:
-                                  const EdgeInsets.symmetric(horizontal: 5),
+                                  // padding:
+                                  // const EdgeInsets.symmetric(horizontal: 5),
                                   alignment: Alignment.center,
                                   value: carotidValue,
-                                  items: carotidList.map<DropdownMenuItem<String>>(
-                                        (String value) {
+                                  items:
+                                      carotidList.map<DropdownMenuItem<String>>(
+                                    (String value) {
                                       return DropdownMenuItem<String>(
                                         value: value,
                                         child: Text(value),
@@ -192,9 +193,9 @@ class _CTAViewState extends State<CTAView> {
                                   ).toList(),
                                   onChanged: (value) {
                                     setState(
-                                          () {
-                                            carotidValue = value.toString();
-                                            wholeValue = "";
+                                      () {
+                                        carotidValue = value.toString();
+                                        wholeValue = "";
                                         thoracicValue = "";
                                         abValue = "";
                                         coronaryValue = "";
@@ -227,12 +228,13 @@ class _CTAViewState extends State<CTAView> {
                                 decoration: BoxDecoration(
                                   color: Colors.grey[300],
                                   borderRadius: BorderRadius.circular(4.0),
-                                  border: Border.all(color: Colors.black, width: 1),
+                                  border:
+                                      Border.all(color: Colors.black, width: 1),
                                 ),
                                 child: DropdownButton(
                                   isExpanded: true,
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  // padding:
+                                  //     const EdgeInsets.symmetric(horizontal: 5),
                                   alignment: Alignment.center,
                                   value: wholeValue,
                                   items: ctaWith.map<DropdownMenuItem<String>>(
@@ -280,12 +282,13 @@ class _CTAViewState extends State<CTAView> {
                                 decoration: BoxDecoration(
                                   color: Colors.grey[300],
                                   borderRadius: BorderRadius.circular(4.0),
-                                  border: Border.all(color: Colors.black, width: 1),
+                                  border:
+                                      Border.all(color: Colors.black, width: 1),
                                 ),
                                 child: DropdownButton(
                                   isExpanded: true,
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  // padding:
+                                  //     const EdgeInsets.symmetric(horizontal: 5),
                                   alignment: Alignment.center,
                                   value: thoracicValue,
                                   items: ctaWith.map<DropdownMenuItem<String>>(
@@ -304,7 +307,8 @@ class _CTAViewState extends State<CTAView> {
                                         thoracicValue = value.toString();
                                         abValue = "";
                                         coronaryValue = "";
-                                        valueCTA = "thoracic" + value.toString();
+                                        valueCTA =
+                                            "thoracic" + value.toString();
                                       },
                                     );
                                   },
@@ -333,12 +337,13 @@ class _CTAViewState extends State<CTAView> {
                                 decoration: BoxDecoration(
                                   color: Colors.grey[300],
                                   borderRadius: BorderRadius.circular(4.0),
-                                  border: Border.all(color: Colors.black, width: 1),
+                                  border:
+                                      Border.all(color: Colors.black, width: 1),
                                 ),
                                 child: DropdownButton(
                                   isExpanded: true,
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  // padding:
+                                  //     const EdgeInsets.symmetric(horizontal: 5),
                                   alignment: Alignment.center,
                                   value: abValue,
                                   items: ctaWith.map<DropdownMenuItem<String>>(
@@ -386,15 +391,17 @@ class _CTAViewState extends State<CTAView> {
                                 decoration: BoxDecoration(
                                   color: Colors.grey[300],
                                   borderRadius: BorderRadius.circular(4.0),
-                                  border: Border.all(color: Colors.black, width: 1),
+                                  border:
+                                      Border.all(color: Colors.black, width: 1),
                                 ),
                                 child: DropdownButton(
                                   isExpanded: true,
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  // padding:
+                                  //     const EdgeInsets.symmetric(horizontal: 5),
                                   alignment: Alignment.center,
                                   value: coronaryValue,
-                                  items: coronaryItem.map<DropdownMenuItem<String>>(
+                                  items: coronaryItem
+                                      .map<DropdownMenuItem<String>>(
                                     (String value) {
                                       return DropdownMenuItem<String>(
                                         value: value,
@@ -447,7 +454,8 @@ class _CTAViewState extends State<CTAView> {
                             ),
                           ),
                         );
-                      } else if (valueCTA == "carotidA" || valueCTA == "wholeNC" ||
+                      } else if (valueCTA == "carotidA" ||
+                          valueCTA == "wholeNC" ||
                           valueCTA == "wholeA" ||
                           valueCTA == "wholeV" ||
                           valueCTA == "thoracicNC" ||

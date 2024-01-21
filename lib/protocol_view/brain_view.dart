@@ -58,7 +58,7 @@ class _BrainViewState extends State<BrainView> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          backgroundColor: bgColor,
+      backgroundColor: bgColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 60),
         child: Row(
@@ -99,15 +99,16 @@ class _BrainViewState extends State<BrainView> {
                               decoration: BoxDecoration(
                                 color: Colors.grey[300],
                                 borderRadius: BorderRadius.circular(4.0),
-                                border: Border.all(color: Colors.black, width: 1),
+                                border:
+                                    Border.all(color: Colors.black, width: 1),
                               ),
                               child: DropdownButton(
                                 isExpanded: true,
-                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                // padding: const EdgeInsets.symmetric(horizontal: 5),
                                 alignment: Alignment.center,
                                 value: phaseValue1,
                                 items: phaseList1.map<DropdownMenuItem<String>>(
-                                      (String value) {
+                                  (String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
                                       child: Text(value),
@@ -116,9 +117,9 @@ class _BrainViewState extends State<BrainView> {
                                 ).toList(),
                                 onChanged: (value) {
                                   setState(
-                                        () {
-                                          phaseValue1 = value.toString();
-                                          phaseValue2 = "";
+                                    () {
+                                      phaseValue1 = value.toString();
+                                      phaseValue2 = "";
                                       valueBrain = "phase1" + value.toString();
                                     },
                                   );
@@ -148,11 +149,12 @@ class _BrainViewState extends State<BrainView> {
                               decoration: BoxDecoration(
                                 color: Colors.grey[300],
                                 borderRadius: BorderRadius.circular(4.0),
-                                border: Border.all(color: Colors.black, width: 1),
+                                border:
+                                    Border.all(color: Colors.black, width: 1),
                               ),
                               child: DropdownButton(
                                 isExpanded: true,
-                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                // padding: const EdgeInsets.symmetric(horizontal: 5),
                                 alignment: Alignment.center,
                                 value: phaseValue2,
                                 items: phaseList2.map<DropdownMenuItem<String>>(
@@ -167,7 +169,7 @@ class _BrainViewState extends State<BrainView> {
                                   setState(
                                     () {
                                       phaseValue2 = value.toString();
-                                      phaseValue1= "";
+                                      phaseValue1 = "";
                                       valueBrain = value.toString();
                                     },
                                   );
